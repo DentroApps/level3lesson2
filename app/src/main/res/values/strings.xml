@@ -2,4 +2,5 @@
     <string name="app_name">Level Three Lesson Two</string>
 
     <string name="enter_text">Enter Text</string>
+    <string name="to_event_bus">To Event Bus</string>
 </resources>

@@ -1,5 +1,7 @@
 package ru.dentro.geekbrains.levelthreelessontwo;
 
+import android.util.Log;
+
 import io.reactivex.Observable;
 
 public class TextStreamHandler {
@@ -11,7 +13,9 @@ public class TextStreamHandler {
     }
 
     public void emitText (Observable<String> obsString){
-        obsString.subscribe(text -> receiver.onTextReceived(text));
+        obsString
+                .doOnError(e -> Log.d("ERROR", e.getMessage()))
+                .subscribe(text -> receiver.onTextReceived(text));
     }
 
 }

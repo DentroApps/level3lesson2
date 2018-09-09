@@ -1,9 +1,12 @@
 package ru.dentro.geekbrains.levelthreelessontwo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -11,12 +14,13 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements TextReceiver {
+public class MainActivity extends AppCompatActivity implements TextReceiver, View.OnClickListener {
 
     private EditText etTextInput;
     private TextView twTextOutput;
     private TextStreamHandler handler;
     private Observable<String> obsText;
+    private Button btnEventbus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements TextReceiver {
         etTextInput = findViewById(R.id.etTextInput);
         twTextOutput = findViewById(R.id.twTextOutput);
         etTextInput.addTextChangedListener(inputListener);
+        btnEventbus = findViewById(R.id.btnEventBus);
+        btnEventbus.setOnClickListener(this);
 
         handler = new TextStreamHandler(this);
     }
@@ -46,12 +52,17 @@ public class MainActivity extends AppCompatActivity implements TextReceiver {
             obsText = Observable.just(s.toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-            handler.emitText(obsText);
+            handler.emitText(obsText); // Можно обойтись и без Rx, но не зря же мы его проходим
         }
     };
 
     @Override
     public void onTextReceived(String s) {
         twTextOutput.setText(s);
+    }
+
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(this, EventBusActivity.class));
     }
 }
