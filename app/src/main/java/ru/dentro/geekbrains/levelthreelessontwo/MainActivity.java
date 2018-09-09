@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements TextReceiver, Vie
     private TextView twTextOutput;
     private TextStreamHandler handler;
     private Observable<String> obsText;
-    private Button btnEventbus;
+    private Button btnEventBus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements TextReceiver, Vie
         etTextInput = findViewById(R.id.etTextInput);
         twTextOutput = findViewById(R.id.twTextOutput);
         etTextInput.addTextChangedListener(inputListener);
-        btnEventbus = findViewById(R.id.btnEventBus);
-        btnEventbus.setOnClickListener(this);
+        btnEventBus = findViewById(R.id.btnEventBus);
+        btnEventBus.setOnClickListener(this);
 
         handler = new TextStreamHandler(this);
     }
