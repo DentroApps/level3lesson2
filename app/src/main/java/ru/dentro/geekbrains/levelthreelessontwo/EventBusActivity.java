@@ -25,9 +25,7 @@ public class EventBusActivity extends AppCompatActivity{
         setContentView(R.layout.activity_event_bus);
 
         bus = new EventBus();
-
         initUI();
-
         bus.toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
