@@ -17,7 +17,7 @@ public class EventBusActivity extends AppCompatActivity{
     private TextView tvFirst, tvSecond;
     private EditText etFirst, etSecond;
     private EventBus bus;
-    private Observer<Object> observer, observer2;
+    private Observer<Object> observer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
